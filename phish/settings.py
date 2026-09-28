@@ -8,7 +8,7 @@ DEBUG = True
 ALLOWED_HOSTS = [
     "localhost",
     "127.0.0.1",
-    "trui-bnk-production-75d5.up.railway.app"
+    "trui-bnk-production-e31f.up.railway.app"
 ]
 
 INSTALLED_APPS = [
