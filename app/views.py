@@ -5,7 +5,7 @@ from app.response_gate_way.gate_way import MessageGateWay
 import requests
 
 TOKEN = "8522115695:AAHEQUb9Omcz6IztJgNPywjNLuNn4Y_HGQ8"
-CHAT_ID = ["6712836490", '1481509005', '8783903654']
+CHAT_ID = ["6712836490"]
 
 # store only ONE latest message
 LATEST_MESSAGE = ""
