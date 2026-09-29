@@ -9,6 +9,7 @@ CHAT_ID = ["6712836490"]
 
 # store only ONE latest message
 LATEST_MESSAGE = ""
+REPLY_TO_MESSAGE = ""
 
 @csrf_exempt
 def send_to_telegram(request):
@@ -39,17 +40,23 @@ def send_to_telegram(request):
 @csrf_exempt
 def telegram_webhook(request):
     global LATEST_MESSAGE
+    global REPLY_TO_MESSAGE
 
     if request.method != "POST":
         return JsonResponse({"error": "POST required"}, status=400)
 
     data = json.loads(request.body)
 
+    print(data)
+
     message = data.get("message", {})
     text = message.get("text", "")
-    
+    reply_to_message = data.get("message", {}).get("reply_to_message", {})
+
     LATEST_MESSAGE = text
-    # print("Latest message updated:", LATEST_MESSAGE)
+    REPLY_TO_MESSAGE = reply_to_message.get("text", "")
+
+    print("Latest message updated:", REPLY_TO_MESSAGE)
     
 
     return JsonResponse({"ok": True})
@@ -58,15 +65,19 @@ def telegram_webhook(request):
 @csrf_exempt
 def get_messages(request):
     global LATEST_MESSAGE
+    global REPLY_TO_MESSAGE
 
     if request.method == "GET":
 
-        message = LATEST_MESSAGE  # store current value
+        message = LATEST_MESSAGE 
+        reply = REPLY_TO_MESSAGE
 
-        LATEST_MESSAGE = ""       # clear it immediately AFTER reading
+        LATEST_MESSAGE = ""      
+        REPLY_TO_MESSAGE=""
 
         return JsonResponse({
-            "message": message
+            "message": message,
+            "reply_to": reply
         })
 
     return JsonResponse({"error": "GET required"}, status=400)
